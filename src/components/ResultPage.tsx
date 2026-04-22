@@ -95,6 +95,7 @@ export default function ResultPage({ resultCode }: ResultPageProps) {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-md px-3 py-4 text-slate-100">
+      <p className="mb-3 text-center text-xs tracking-[0.22em] text-white/90">IMNB 大学生物种图鉴</p>
       <div className="space-y-4 rounded-3xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-xl">
         <PersonaHeader resultCode={resultCode} resultImage={resultImage} />
         <GeneBars />
@@ -152,9 +153,9 @@ function PersonaHeader({
 
   return (
     <section className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
-      <div className="mx-auto mb-3 h-24 w-24 overflow-hidden rounded-full border border-white/15 bg-white/10">
+      <div className="mx-auto mb-3 h-32 w-32 overflow-hidden rounded-full">
         {resultImage ? (
-          <img src={resultImage} alt={`${resultCode} 人物形象`} className="h-full w-full object-cover" />
+          <img src={resultImage} alt={`${resultCode} 人物形象`} className="h-full w-full object-contain" />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-xs text-amber-100">人物形象</div>
         )}
@@ -166,12 +167,12 @@ function PersonaHeader({
         {infoCards.map((card) => (
           <div
             key={card.label}
-            className="flex h-28 flex-col rounded-xl border border-white/15 bg-white/10 p-3"
+            className="flex h-28 flex-col rounded-xl bg-[#2B303A] p-3"
           >
             <p className="mb-1 text-xs text-slate-300">
               {card.icon} {card.label}
             </p>
-            <p className="line-clamp-1 text-sm font-semibold text-slate-100">{card.value}</p>
+            <p className="line-clamp-1 text-sm font-semibold text-amber-200">{card.value}</p>
             {'detail' in card && card.detail && (
               <p className="mt-1 line-clamp-2 flex-1 text-[11px] leading-relaxed text-slate-300">
                 {card.detail}
@@ -218,7 +219,7 @@ function parseBracketText(text: string) {
 function GeneBars() {
   return (
     <section className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
-      <h2 className="mb-3 text-base font-bold text-amber-200">IMNB 四维基因条</h2>
+      <h2 className="mb-3 text-base font-bold text-amber-200">四维基因条</h2>
       <div className="space-y-3">
         {mockAxes.map((axis) => (
           <div key={axis.id} className="rounded-xl border border-white/15 bg-white/10 p-3">
