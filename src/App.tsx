@@ -3,17 +3,12 @@ import { toPng, toSvg } from 'html-to-image'
 import { useEffect, useMemo, useRef, useState, type RefObject } from 'react'
 import PosterErrorToast from './components/PosterErrorToast'
 import PosterModal from './components/PosterModal'
+import ResultPage from './components/ResultPage'
 import { questions } from './data/questions'
 import { resultMap } from './data/results'
 
 type Stage = 'landing' | 'testing' | 'gate' | 'result'
 type AnswerChoice = 'left' | 'right' | null
-type LeadForm = {
-  schoolTier: string
-  major: string
-  targetRegion: string
-  targetProgram: string
-}
 type Prediction = {
   admissionRate: number
   schools: string[]
@@ -77,27 +72,19 @@ const resolveAssetUrl = (path: string | undefined): string => {
 }
 
 function App() {
-  const [stage, setStage] = useState<Stage>('landing')
+  const [stage, setStage] = useState<Stage>('testing')
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<AnswerChoice[]>(
     Array.from({ length: questions.length }, () => null),
   )
   const [cardDirection, setCardDirection] = useState<'forward' | 'backward'>('forward')
-  const [form, setForm] = useState<LeadForm>({
-    schoolTier: '',
-    major: '',
-    targetRegion: '',
-    targetProgram: '',
-  })
-  const [prediction, setPrediction] = useState<Prediction>(defaultPrediction)
-  const [submitting, setSubmitting] = useState(false)
+  const [prediction] = useState<Prediction>(defaultPrediction)
   const [posterLoading, setPosterLoading] = useState(false)
   const [posterImageUrl, setPosterImageUrl] = useState('')
   const [posterModalOpen, setPosterModalOpen] = useState(false)
   const [posterErrorOpen, setPosterErrorOpen] = useState(false)
   const [posterErrorMessage, setPosterErrorMessage] = useState('')
   const [swipeCommand, setSwipeCommand] = useState<'left' | 'right' | null>(null)
-  const [swipeButtonLocked, setSwipeButtonLocked] = useState(false)
   const posterRef = useRef<HTMLDivElement>(null)
   const audioContextRef = useRef<AudioContext | null>(null)
 
@@ -158,43 +145,6 @@ function App() {
     })
   }, [])
 
-  const submitLead = async (event: React.FormEvent) => {
-    event.preventDefault()
-    if (!form.schoolTier || !form.major || !form.targetRegion) return
-    setSubmitting(true)
-    try {
-      const payload = {
-        imepResult: imepCode,
-        form,
-      }
-      const response = await fetch('/api/yanbot/predict', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      if (!response.ok) throw new Error('API unavailable')
-      const data = (await response.json()) as Prediction
-      if (data?.schools?.length === 3) {
-        setPrediction(data)
-      }
-    } catch {
-      const base = form.schoolTier === '985' ? 70 : form.schoolTier === '211' ? 62 : 52
-      setPrediction({
-        admissionRate: Math.min(base + (imepCode.includes('O') ? 6 : 1), 83),
-        schools:
-          form.targetRegion === '北上广深'
-            ? ['华东理工大学', '深圳大学', '上海大学']
-            : form.targetRegion === '江浙沪'
-              ? ['苏州大学', '宁波大学', '浙江工业大学']
-              : ['南昌大学', '广西大学', '云南大学'],
-        warning: '目标专业复试波动较大，请提前准备跨科目综合题并预留调剂策略。',
-      })
-    } finally {
-      setSubmitting(false)
-      setStage('result')
-    }
-  }
-
   const generatePoster = async () => {
     if (!posterRef.current) return
     if (posterLoading) return
@@ -237,30 +187,6 @@ function App() {
   return (
     <main className="relative mx-auto min-h-screen w-full max-w-md overflow-hidden bg-[url('/background.png')] bg-cover bg-center px-4 py-6 text-slate-100">
       <div className="relative z-10">
-      {stage === 'landing' && (
-        <section className="flex min-h-[85vh] flex-col justify-between rounded-3xl border border-white/30 bg-white/10 p-6 shadow-2xl backdrop-blur-xl">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 p-4 text-sm backdrop-blur-md">
-              <span className="font-semibold text-amber-200">奇迹自习室</span>
-              <span className="text-slate-300">x</span>
-              <span className="font-semibold text-amber-100">研Bot</span>
-            </div>
-            <h1 className="text-3xl font-black leading-tight">
-              IMEP 大学生性格划卡测试
-            </h1>
-            <p className="text-sm text-slate-300">
-              20 道二选一场景题，3 分钟解锁你的考研基因与上岸预测。
-            </p>
-          </div>
-          <button
-            className="rounded-2xl border border-amber-200/70 bg-gradient-to-r from-amber-300 to-amber-500 px-5 py-4 text-base font-bold text-slate-900 shadow-[0_10px_30px_rgba(245,158,11,0.45)] transition active:scale-95"
-            onClick={() => setStage('testing')}
-          >
-            开始划卡测试
-          </button>
-        </section>
-      )}
-
       {stage === 'testing' && current && (
         <section className="flex min-h-[calc(100vh-3rem)] flex-col gap-4">
           <div className="rounded-2xl border border-white/30 bg-white/10 p-4 shadow-xl backdrop-blur-xl">
@@ -299,99 +225,12 @@ function App() {
               onAnswer={recordAnswer}
             />
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              onClick={() => {
-                if (swipeButtonLocked) return
-                setSwipeButtonLocked(true)
-                setSwipeCommand('left')
-                setTimeout(() => setSwipeButtonLocked(false), 320)
-              }}
-              disabled={swipeButtonLocked}
-              className="rounded-2xl border border-white/30 bg-white/10 p-3 text-sm backdrop-blur-md transition-opacity disabled:opacity-65"
-            >
-              左划选 A
-            </button>
-            <button
-              onClick={() => {
-                if (swipeButtonLocked) return
-                setSwipeButtonLocked(true)
-                setSwipeCommand('right')
-                setTimeout(() => setSwipeButtonLocked(false), 320)
-              }}
-              disabled={swipeButtonLocked}
-              className="rounded-2xl border border-white/30 bg-white/10 p-3 text-sm backdrop-blur-md transition-opacity disabled:opacity-65"
-            >
-              右划选 B
-            </button>
-          </div>
+          <BrandExpose />
         </section>
       )}
 
       {stage === 'gate' && (
-        <section className="space-y-4 rounded-3xl border border-white/30 bg-white/10 p-5 shadow-2xl backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-[0.2em] text-amber-200">初步结论</p>
-          <h2 className="text-2xl font-bold text-amber-100">{imepCode}</h2>
-          {currentResultImage ? (
-            <img
-              src={currentResultImage}
-              alt={`${imepCode} 类型示意图`}
-              className="mx-auto h-52 w-52 rounded-2xl border border-white/20 object-cover object-center shadow-xl"
-            />
-          ) : (
-            <div className="mx-auto flex h-52 w-52 items-center justify-center rounded-2xl border border-white/20 bg-white/5 text-xs text-slate-300">
-              暂无对应结果示意图
-            </div>
-          )}
-          <p className="text-lg font-semibold">{result.title}</p>
-          <p className="text-sm text-slate-300">{result.description}</p>
-          <div className="rounded-2xl border border-amber-200/50 bg-amber-300/15 p-4 text-sm text-amber-50">
-            填写你的战斗参数，解锁研Bot专属【考研生死预测】
-          </div>
-          <form onSubmit={submitLead} className="space-y-3">
-            <select
-              required
-              value={form.schoolTier}
-              onChange={(e) => setForm({ ...form, schoolTier: e.target.value })}
-              className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm backdrop-blur-md"
-            >
-              <option value="">本科院校档次（必填）</option>
-              <option value="985">985</option>
-              <option value="211">211</option>
-              <option value="双非">双非</option>
-            </select>
-            <input
-              required
-              value={form.major}
-              onChange={(e) => setForm({ ...form, major: e.target.value })}
-              placeholder="目前就读专业（必填）"
-              className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm backdrop-blur-md placeholder:text-slate-300"
-            />
-            <select
-              required
-              value={form.targetRegion}
-              onChange={(e) => setForm({ ...form, targetRegion: e.target.value })}
-              className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm backdrop-blur-md"
-            >
-              <option value="">意向考研地区（必填）</option>
-              <option value="北上广深">北上广深</option>
-              <option value="江浙沪">江浙沪</option>
-              <option value="其他不限">其他不限</option>
-            </select>
-            <input
-              value={form.targetProgram}
-              onChange={(e) => setForm({ ...form, targetProgram: e.target.value })}
-              placeholder="目标院校/专业（选填）"
-              className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm backdrop-blur-md placeholder:text-slate-300"
-            />
-            <button
-              disabled={submitting}
-              className="w-full rounded-2xl border border-amber-200/70 bg-gradient-to-r from-amber-300 to-amber-500 py-3 font-bold text-slate-900 shadow-[0_10px_30px_rgba(245,158,11,0.4)] disabled:opacity-60"
-            >
-              {submitting ? '正在解锁预测...' : '解锁完整结果'}
-            </button>
-          </form>
-        </section>
+        <ResultPage resultCode={imepCode} />
       )}
 
       {stage === 'result' && (
@@ -469,6 +308,52 @@ function App() {
         onClose={() => setPosterErrorOpen(false)}
       />
     </main>
+  )
+}
+
+function BrandExpose() {
+  return (
+    <section className="rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-md">
+      <p className="mb-2 text-sm font-bold text-amber-200">联合出品</p>
+      <div className="space-y-2">
+        <div className="rounded-xl border border-white/15 bg-white/10 p-2.5">
+          <a
+            href="https://wings-ai.net"
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs font-semibold text-amber-300 underline underline-offset-2"
+          >
+            奇迹自习室（wings-ai.net）
+          </a>
+          <p className="mt-1 text-[11px] text-slate-300">
+            辅助记忆考研知识点，可视化管理你的自习进度
+          </p>
+          <div className="mt-2 flex items-center gap-2">
+            <div className="flex h-12 w-12 items-center justify-center rounded-md border border-white/20 bg-black/25 text-[10px] text-slate-300">
+              二维码
+            </div>
+            <span className="text-[10px] text-slate-400">扫码关注公众号</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-white/15 bg-white/10 p-2.5">
+          <a
+            href="https://h5.yanbot.tech"
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs font-semibold text-amber-300 underline underline-offset-2"
+          >
+            研Bot（h5.yanbot.tech）
+          </a>
+          <p className="mt-1 text-[11px] text-slate-300">全网最硬核的考研大数据平台</p>
+          <div className="mt-2 flex items-center gap-2">
+            <div className="flex h-12 w-12 items-center justify-center rounded-md border border-white/20 bg-black/25 text-[10px] text-slate-300">
+              二维码
+            </div>
+            <span className="text-[10px] text-slate-400">扫码关注公众号</span>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 
