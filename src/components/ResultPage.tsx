@@ -183,30 +183,46 @@ function GeneBars({ axes }: { axes: AxisDatum[] }) {
     <section className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
       <h2 className="mb-3 text-base font-bold text-amber-200">四维基因条</h2>
       <div className="space-y-3">
-        {axes.map((axis) => (
-          <div key={axis.id} className="rounded-xl border border-white/15 bg-white/10 p-3">
+        {axes.map((axis) => {
+          const dominantScore = axis.winner === 'left' ? axis.leftScore : axis.rightScore
+          const dominantStyle = { width: `${dominantScore}%` }
+
+          return (
+            <div key={axis.id} className="rounded-xl border border-white/15 bg-white/10 p-3">
             <div className="mb-1.5 flex items-center justify-between text-xs">
               <span className="text-slate-300">{axis.label}</span>
               <span className="font-semibold text-amber-300">
-                {axis.winner === 'left' ? axis.leftScore : axis.rightScore}%
+                {axis.winner === 'left' ? `${axis.leftScore}%` : `${axis.rightScore}%`}
               </span>
             </div>
-            <div className="mb-1.5 h-2 overflow-hidden rounded-full bg-black/25">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-700"
-                style={{ width: `${axis.winner === 'left' ? axis.leftScore : axis.rightScore}%` }}
-              />
+            <div className="relative mb-1.5 h-2 overflow-hidden rounded-full bg-black/25">
+              <div className="flex h-full w-full">
+                <div className="relative h-full w-1/2 bg-slate-500/40">
+                  {axis.winner === 'left' && (
+                    <div
+                      className="absolute right-0 top-0 h-full rounded-l-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-700"
+                      style={dominantStyle}
+                    />
+                  )}
+                </div>
+                <div className="relative h-full w-1/2 bg-slate-500/40">
+                  {axis.winner === 'right' && (
+                    <div
+                      className="absolute left-0 top-0 h-full rounded-r-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-700"
+                      style={dominantStyle}
+                    />
+                  )}
+                </div>
+              </div>
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-3 w-[2px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90" />
             </div>
             <div className="flex items-center justify-between text-[11px] text-slate-300">
-              <span>
-                {axis.leftLabel} ({axis.leftScore}%)
-              </span>
-              <span>
-                {axis.rightLabel} ({axis.rightScore}%)
-              </span>
+              <span>{axis.leftLabel}</span>
+              <span>{axis.rightLabel}</span>
             </div>
           </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
