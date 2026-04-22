@@ -15,6 +15,7 @@ type DeepReportState = 'form' | 'loading' | 'success'
 
 type ResultPageProps = {
   resultCode: string
+  axes: AxisDatum[]
 }
 
 const resultImageMap: Record<string, string> = {
@@ -36,46 +37,7 @@ const resultImageMap: Record<string, string> = {
   PRGC: '/IMEP16/PRGC-风口交际花-1776863410140.png',
 }
 
-const mockAxes: AxisDatum[] = [
-  {
-    id: 'input',
-    label: '输入轴 Input',
-    leftLabel: '理论 T',
-    rightLabel: '实践 P',
-    leftScore: 70,
-    rightScore: 30,
-    winner: 'left',
-  },
-  {
-    id: 'motivation',
-    label: '动机轴 Motivation',
-    leftLabel: '求稳 S',
-    rightLabel: '冒险 R',
-    leftScore: 40,
-    rightScore: 60,
-    winner: 'right',
-  },
-  {
-    id: 'network',
-    label: '社交轴 Network',
-    leftLabel: '独狼 L',
-    rightLabel: '抱团 G',
-    leftScore: 80,
-    rightScore: 20,
-    winner: 'left',
-  },
-  {
-    id: 'behavior',
-    label: '执行轴 Behavior',
-    leftLabel: '秩序 O',
-    rightLabel: '混沌 C',
-    leftScore: 90,
-    rightScore: 10,
-    winner: 'left',
-  },
-]
-
-export default function ResultPage({ resultCode }: ResultPageProps) {
+export default function ResultPage({ resultCode, axes }: ResultPageProps) {
   const [deepReportState, setDeepReportState] = useState<DeepReportState>('form')
   const [form, setForm] = useState({
     undergraduateSchool: '',
@@ -98,7 +60,7 @@ export default function ResultPage({ resultCode }: ResultPageProps) {
       <p className="mb-3 text-center text-xs tracking-[0.22em] text-white/90">IMNB 大学生物种图鉴</p>
       <div className="space-y-4 rounded-3xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-xl">
         <PersonaHeader resultCode={resultCode} resultImage={resultImage} />
-        <GeneBars />
+        <GeneBars axes={axes} />
         <HeartfeltNote note={result.heartfeltNote} />
         <MarketingBanner />
         <DeepReportSection
@@ -216,12 +178,12 @@ function parseBracketText(text: string) {
   }
 }
 
-function GeneBars() {
+function GeneBars({ axes }: { axes: AxisDatum[] }) {
   return (
     <section className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
       <h2 className="mb-3 text-base font-bold text-amber-200">四维基因条</h2>
       <div className="space-y-3">
-        {mockAxes.map((axis) => (
+        {axes.map((axis) => (
           <div key={axis.id} className="rounded-xl border border-white/15 bg-white/10 p-3">
             <div className="mb-1.5 flex items-center justify-between text-xs">
               <span className="text-slate-300">{axis.label}</span>

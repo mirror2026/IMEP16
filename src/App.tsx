@@ -9,6 +9,15 @@ import { resultMap } from './data/results'
 
 type Stage = 'landing' | 'testing' | 'gate' | 'result'
 type AnswerChoice = 'left' | 'right' | null
+type AxisDatum = {
+  id: string
+  label: string
+  leftLabel: string
+  rightLabel: string
+  leftScore: number
+  rightScore: number
+  winner: 'left' | 'right'
+}
 type Prediction = {
   admissionRate: number
   schools: string[]
@@ -105,6 +114,59 @@ function App() {
     const energy = score.L >= score.G ? 'L' : 'G'
     const pacing = score.O >= score.C ? 'O' : 'C'
     return `${input}${motivation}${energy}${pacing}`
+  }, [answers])
+
+  const geneAxes = useMemo<AxisDatum[]>(() => {
+    const axisConfigs = [
+      {
+        id: 'input',
+        dimension: 'Input',
+        label: '输入轴 Input',
+        leftLabel: '理论 T',
+        rightLabel: '实践 P',
+      },
+      {
+        id: 'motivation',
+        dimension: 'Motivation',
+        label: '动机轴 Motivation',
+        leftLabel: '求稳 S',
+        rightLabel: '冒险 R',
+      },
+      {
+        id: 'network',
+        dimension: 'Energy',
+        label: '社交轴 Network',
+        leftLabel: '独狼 L',
+        rightLabel: '抱团 G',
+      },
+      {
+        id: 'behavior',
+        dimension: 'Pacing',
+        label: '执行轴 Behavior',
+        leftLabel: '秩序 O',
+        rightLabel: '混沌 C',
+      },
+    ] as const
+
+    return axisConfigs.map((axis) => {
+      const ids = questions
+        .filter((question) => question.dimension === axis.dimension)
+        .map((question) => question.id - 1)
+      const total = ids.length || 1
+      const leftCount = ids.reduce((count, idx) => count + (answers[idx] === 'left' ? 1 : 0), 0)
+      const rightCount = ids.reduce((count, idx) => count + (answers[idx] === 'right' ? 1 : 0), 0)
+      const leftScore = Math.round((leftCount / total) * 100)
+      const rightScore = Math.round((rightCount / total) * 100)
+      return {
+        id: axis.id,
+        label: axis.label,
+        leftLabel: axis.leftLabel,
+        rightLabel: axis.rightLabel,
+        leftScore,
+        rightScore,
+        winner: leftScore >= rightScore ? 'left' : 'right',
+      }
+    })
   }, [answers])
 
   const result = resultMap[imepCode] ?? resultMap.TSLO
@@ -230,7 +292,7 @@ function App() {
       )}
 
       {stage === 'gate' && (
-        <ResultPage resultCode={imepCode} />
+        <ResultPage resultCode={imepCode} axes={geneAxes} />
       )}
 
       {stage === 'result' && (
