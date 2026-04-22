@@ -152,7 +152,7 @@ function PersonaHeader({
 
   return (
     <section className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
-      <div className="mx-auto mb-3 h-24 w-24 overflow-hidden rounded-full border border-amber-400/60 bg-slate-800/60">
+      <div className="mx-auto mb-3 h-24 w-24 overflow-hidden rounded-full border border-white/15 bg-white/10">
         {resultImage ? (
           <img src={resultImage} alt={`${resultCode} 人物形象`} className="h-full w-full object-cover" />
         ) : (
@@ -166,12 +166,12 @@ function PersonaHeader({
         {infoCards.map((card) => (
           <div
             key={card.label}
-            className="flex h-28 flex-col rounded-xl border border-white/15 bg-slate-800/80 p-2.5"
+            className="flex h-28 flex-col rounded-xl border border-white/15 bg-white/10 p-3"
           >
             <p className="mb-1 text-xs text-slate-300">
               {card.icon} {card.label}
             </p>
-            <p className="line-clamp-1 text-sm font-semibold text-amber-100">{card.value}</p>
+            <p className="line-clamp-1 text-sm font-semibold text-slate-100">{card.value}</p>
             {'detail' in card && card.detail && (
               <p className="mt-1 line-clamp-2 flex-1 text-[11px] leading-relaxed text-slate-300">
                 {card.detail}
@@ -320,7 +320,7 @@ function DeepReportSection({
       {deepReportState === 'form' && (
         <>
           <h2 className="mb-3 text-base font-bold text-amber-200">
-            获取专属考研上岸方案（基于研Bot大数据）
+            获取专属考研建议
           </h2>
           <form className="space-y-2.5" onSubmit={onSubmit}>
             <input
@@ -329,25 +329,25 @@ function DeepReportSection({
                 onChange({ ...form, undergraduateSchool: event.target.value })
               }
               placeholder="本科院校"
-              className="w-full rounded-xl border border-white/15 bg-slate-800/80 px-3 py-2.5 text-sm placeholder:text-slate-400"
+              className="w-full rounded-xl border border-slate-500/40 bg-slate-700/60 px-3 py-2.5 text-sm placeholder:text-slate-300"
             />
             <input
               value={form.targetMajor}
               onChange={(event) => onChange({ ...form, targetMajor: event.target.value })}
               placeholder="目标专业代码/名称"
-              className="w-full rounded-xl border border-white/15 bg-slate-800/80 px-3 py-2.5 text-sm placeholder:text-slate-400"
+              className="w-full rounded-xl border border-slate-500/40 bg-slate-700/60 px-3 py-2.5 text-sm placeholder:text-slate-300"
             />
             <input
               value={form.stage}
               onChange={(event) => onChange({ ...form, stage: event.target.value })}
               placeholder="目前复习阶段"
-              className="w-full rounded-xl border border-white/15 bg-slate-800/80 px-3 py-2.5 text-sm placeholder:text-slate-400"
+              className="w-full rounded-xl border border-slate-500/40 bg-slate-700/60 px-3 py-2.5 text-sm placeholder:text-slate-300"
             />
             <button
               type="submit"
               className="mt-1 w-full rounded-xl bg-amber-500 py-2.5 text-sm font-bold text-slate-900 shadow-[0_8px_24px_rgba(245,158,11,0.35)]"
             >
-              一键生成 AI 报考评估（免费）
+              一键生成评估结果（免费）
             </button>
           </form>
         </>

@@ -313,43 +313,41 @@ function App() {
 
 function BrandExpose() {
   return (
-    <section className="rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-md">
-      <p className="mb-2 text-sm font-bold text-amber-200">联合出品</p>
+    <section className="rounded-xl border border-white/20 bg-white/10 p-2.5 backdrop-blur-md">
+      <p className="mb-1.5 text-xs font-bold text-amber-200">联合出品</p>
       <div className="space-y-2">
-        <div className="rounded-xl border border-white/15 bg-white/10 p-2.5">
-          <a
-            href="https://wings-ai.net"
-            target="_blank"
-            rel="noreferrer"
-            className="text-xs font-semibold text-amber-300 underline underline-offset-2"
-          >
-            奇迹自习室（wings-ai.net）
-          </a>
-          <p className="mt-1 text-[11px] text-slate-300">
-            辅助记忆考研知识点，可视化管理你的自习进度
-          </p>
-          <div className="mt-2 flex items-center gap-2">
-            <div className="flex h-12 w-12 items-center justify-center rounded-md border border-white/20 bg-black/25 text-[10px] text-slate-300">
-              二维码
-            </div>
-            <span className="text-[10px] text-slate-400">扫码关注公众号</span>
+        <div className="grid grid-cols-[1fr_44px] items-center gap-2 rounded-lg border border-white/15 bg-white/10 p-2">
+          <div>
+            <a
+              href="https://wings-ai.net"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[11px] font-semibold text-amber-300 underline underline-offset-2"
+            >
+              奇迹自习室（wings-ai.net）
+            </a>
+            <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-300">
+              辅助记忆考研知识点，可视化管理你的自习进度
+            </p>
+          </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-md border border-white/20 bg-black/25 text-[9px] text-slate-300">
+            二维码
           </div>
         </div>
-        <div className="rounded-xl border border-white/15 bg-white/10 p-2.5">
-          <a
-            href="https://h5.yanbot.tech"
-            target="_blank"
-            rel="noreferrer"
-            className="text-xs font-semibold text-amber-300 underline underline-offset-2"
-          >
-            研Bot（h5.yanbot.tech）
-          </a>
-          <p className="mt-1 text-[11px] text-slate-300">全网最硬核的考研大数据平台</p>
-          <div className="mt-2 flex items-center gap-2">
-            <div className="flex h-12 w-12 items-center justify-center rounded-md border border-white/20 bg-black/25 text-[10px] text-slate-300">
-              二维码
-            </div>
-            <span className="text-[10px] text-slate-400">扫码关注公众号</span>
+        <div className="grid grid-cols-[1fr_44px] items-center gap-2 rounded-lg border border-white/15 bg-white/10 p-2">
+          <div>
+            <a
+              href="https://h5.yanbot.tech"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[11px] font-semibold text-amber-300 underline underline-offset-2"
+            >
+              研Bot（h5.yanbot.tech）
+            </a>
+            <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-300">全网最硬核的考研大数据平台</p>
+          </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-md border border-white/20 bg-black/25 text-[9px] text-slate-300">
+            二维码
           </div>
         </div>
       </div>
