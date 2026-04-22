@@ -242,7 +242,10 @@ function MarketingBanner() {
             <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-white/20 bg-black/25 text-[11px] text-slate-200">
               二维码
             </div>
-            <span className="text-xs text-slate-300">扫码关注公众号</span>
+            <div>
+              <p className="text-xs text-slate-300">扫码关注公众号</p>
+              <p className="mt-0.5 text-sm font-semibold text-white">奇迹飞鸟</p>
+            </div>
           </div>
         </div>
         <div className="rounded-xl border border-white/15 bg-white/10 p-3">
@@ -254,12 +257,15 @@ function MarketingBanner() {
           >
             研Bot（h5.yanbot.tech）
           </a>
-          <p className="mt-1 text-xs text-slate-300">全网最硬核的考研大数据平台</p>
+          <p className="mt-1 text-xs text-slate-300">全网最硬核的考研院校大数据平台</p>
           <div className="mt-2 flex items-center gap-3">
             <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-white/20 bg-black/25 text-[11px] text-slate-200">
               二维码
             </div>
-            <span className="text-xs text-slate-300">扫码关注公众号</span>
+            <div>
+              <p className="text-xs text-slate-300">扫码关注公众号</p>
+              <p className="mt-0.5 text-sm font-semibold text-white">研Bot</p>
+            </div>
           </div>
         </div>
       </div>
