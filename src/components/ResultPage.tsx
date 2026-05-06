@@ -48,6 +48,10 @@ export default function ResultPage({ resultCode, axes }: ResultPageProps) {
         <GeneBars axes={axes} />
         <HeartfeltNote note={result.heartfeltNote} />
         <JointProduction />
+        <div
+          className="my-12 h-px w-full shrink-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+          aria-hidden
+        />
         <UltimateEggPromo />
       </div>
     </div>
