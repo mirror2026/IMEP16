@@ -17,22 +17,22 @@ type ResultPageProps = {
 }
 
 const resultImageMap: Record<string, string> = {
-  TSLO: '/IMEP16/TSLO-满绩卷王-1776863339319.png',
-  TSLC: '/IMEP16/TSLC-薛定谔学霸-1776863340547.png',
-  TSGO: '/IMEP16/TSGO-移动资料库-1776863346337.png',
-  TSGC: '/IMEP16/TSGC-群聊焦虑传播者-1776863347537.png',
-  PSLO: '/IMEP16/PSLO-体制内隐形人-1776863356090.png',
-  PSLC: '/IMEP16/PSLC-极限捡漏大师-1776863357603.png',
-  PSGO: '/IMEP16/PSGO-社团劳模-1776863360671.png',
-  PSGC: '/IMEP16/PSGC-快乐混子-1776863368413.png',
-  TRGC: '/IMEP16/TRGC-赛博街溜子-1776863379820.png',
-  TRGO: '/IMEP16/TRGO-PPT画饼导师-1776863378576.png',
-  TRLC: '/IMEP16/TRLC-午夜学术疯子-1776863374121.png',
-  TRLO: '/IMEP16/TRLO-闭门极客-1776863374614.png',
-  PRLO: '/IMEP16/PRLO-独狼搞钱机-1776863394805.png',
-  PRLC: '/IMEP16/PRLC-草莽创业猴-1776863403263.png',
-  PRGO: '/IMEP16/PRGO-大厂发电机-1776863407333.png',
-  PRGC: '/IMEP16/PRGC-风口交际花-1776863410140.png',
+  TSLO: '/IMEP16/result-tslo.png',
+  TSLC: '/IMEP16/result-tslc.png',
+  TSGO: '/IMEP16/result-tsgo.png',
+  TSGC: '/IMEP16/result-tsgc.png',
+  PSLO: '/IMEP16/result-pslo.png',
+  PSLC: '/IMEP16/result-pslc.png',
+  PSGO: '/IMEP16/result-psgo.png',
+  PSGC: '/IMEP16/result-psgc.png',
+  TRGC: '/IMEP16/result-trgc.png',
+  TRGO: '/IMEP16/result-trgo.png',
+  TRLC: '/IMEP16/result-trlc.png',
+  TRLO: '/IMEP16/result-trlo.png',
+  PRLO: '/IMEP16/result-prlo.png',
+  PRLC: '/IMEP16/result-prlc.png',
+  PRGO: '/IMEP16/result-prgo.png',
+  PRGC: '/IMEP16/result-prgc.png',
 }
 
 export default function ResultPage({ resultCode, axes }: ResultPageProps) {
@@ -225,7 +225,7 @@ function HeartfeltNote({ note }: { note: string }) {
 const EGG_HIGHLIGHTS = [
   { headline: '精准分差带', sub: '冲刺 / 稳妥 / 保底' },
   { headline: '大数据依据', sub: '最新报录比与调剂线' },
-  { headline: '置信度检验', sub: '规避信息差与跨考天坑' },
+  { headline: '跨考风险预警', sub: '精准定位背景短板' },
   { headline: 'AI 深度研判', sub: '专属备考路线规划' },
 ] as const
 
@@ -254,7 +254,7 @@ function UltimateEggPromo() {
         <span> | 你最适合考哪所学校？</span>
       </h2>
       <p className="mt-2 text-xs leading-relaxed text-slate-600">
-        「研Bot」AI择校大师为你提供多维度上岸策略推演：
+        「研Bot」AI择校大师为你提供多维度上岸策略：
       </p>
       <ul className="mt-4 grid grid-cols-2 gap-3">
         {EGG_HIGHLIGHTS.map((item) => (

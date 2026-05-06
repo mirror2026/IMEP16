@@ -5,7 +5,7 @@ export default function DeveloperIpCard() {
       <div className="mb-1 ml-2 mt-0 text-[11px] tracking-widest text-white/70">✦ 创作者介绍</div>
       <div className="flex w-full items-center gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-md">
         <img
-          src="/奇迹飞鸟头像.png"
+          src="/avatar-creator.png"
           alt="奇迹飞鸟"
           className="h-12 w-12 shrink-0 rounded-full object-cover"
         />

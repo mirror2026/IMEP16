@@ -23,7 +23,7 @@ export default function JointProduction() {
           </div>
           <div className="flex items-center justify-start gap-1.5">
             <img
-              src="/奇迹飞鸟头像.png"
+              src="/avatar-creator.png"
               alt="奇迹飞鸟"
               className="h-11 w-11 shrink-0 rounded-full object-cover"
             />
@@ -47,7 +47,7 @@ export default function JointProduction() {
           </div>
           <div className="flex items-center justify-start gap-1.5">
             <img
-              src="/研bot公众号.jpg"
+              src="/partner-yanbot-wechat.jpg"
               alt="研Bot 微信公众号"
               className="h-11 w-11 shrink-0 rounded-md border border-white/20 bg-black/25 object-contain"
             />

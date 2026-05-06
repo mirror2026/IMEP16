@@ -1,0 +1,202 @@
+[
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PRGC-风口交际花-1776863410140.png",
+    "to": "public/IMEP16/result-prgc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PRGO-大厂发电机-1776863407333.png",
+    "to": "public/IMEP16/result-prgo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PRLC-草莽创业猴-1776863403263.png",
+    "to": "public/IMEP16/result-prlc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PRLO-独狼搞钱机-1776863394805.png",
+    "to": "public/IMEP16/result-prlo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PSGC-快乐混子-1776863368413.png",
+    "to": "public/IMEP16/result-psgc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PSGO-社团劳模-1776863360671.png",
+    "to": "public/IMEP16/result-psgo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PSLC-极限捡漏大师-1776863357603.png",
+    "to": "public/IMEP16/result-pslc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/PSLO-体制内隐形人-1776863356090.png",
+    "to": "public/IMEP16/result-pslo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TRGC-赛博街溜子-1776863379820.png",
+    "to": "public/IMEP16/result-trgc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TRGO-PPT画饼导师-1776863378576.png",
+    "to": "public/IMEP16/result-trgo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TRLC-午夜学术疯子-1776863374121.png",
+    "to": "public/IMEP16/result-trlc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TRLO-闭门极客-1776863374614.png",
+    "to": "public/IMEP16/result-trlo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TSGC-群聊焦虑传播者-1776863347537.png",
+    "to": "public/IMEP16/result-tsgc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TSGO-移动资料库-1776863346337.png",
+    "to": "public/IMEP16/result-tsgo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TSLC-薛定谔学霸-1776863340547.png",
+    "to": "public/IMEP16/result-tslc.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/IMEP16/TSLO-满绩卷王-1776863339319.png",
+    "to": "public/IMEP16/result-tslo.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/DDL玄学-1776864206860.png",
+    "to": "public/Q20/scene-q20.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/Offer抉择-1776864112983.png",
+    "to": "public/Q20/scene-q9.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/兵荒马乱-1776864185496.png",
+    "to": "public/Q20/scene-q17.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/厕所搭子-1776864148427.png",
+    "to": "public/Q20/scene-q13.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/吃瓜法则-1776864061295.png",
+    "to": "public/Q20/scene-q3.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/宿舍求生-1776864049480.png",
+    "to": "public/Q20/scene-q2.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/小组作业-1776864166140.png",
+    "to": "public/Q20/scene-q15.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/心动场景-1776864035563.png",
+    "to": "public/Q20/scene-q1.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/报错场景-1776864068525.png",
+    "to": "public/Q20/scene-q4.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/海王陷阱-1776864088261.png",
+    "to": "public/Q20/scene-q6.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/深夜茶话会-1776864128460.png",
+    "to": "public/Q20/scene-q11.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/灵异物理学-1776864174956.png",
+    "to": "public/Q20/scene-q16.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/玄学解压-1776864194042.png",
+    "to": "public/Q20/scene-q18.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/研Bot预警-1776864118432.png",
+    "to": "public/Q20/scene-q10.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/破产危机-1776864097591.png",
+    "to": "public/Q20/scene-q7.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/社团遁术-1776864140691.png",
+    "to": "public/Q20/scene-q12.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/立Flag-1776864201639.png",
+    "to": "public/Q20/scene-q19.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/违纪边缘-1776864103549.png",
+    "to": "public/Q20/scene-q8.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/选课博弈-1776864074381.png",
+    "to": "public/Q20/scene-q5.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/Q20/饭点落单-1776864157611.png",
+    "to": "public/Q20/scene-q14.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/icon_副本.png",
+    "to": "public/icon-copy.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/logo_副本.png",
+    "to": "public/logo-copy.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/奇迹飞鸟头像.png",
+    "to": "public/avatar-creator.png"
+  },
+  {
+    "action": "renamed",
+    "from": "public/研bot公众号.jpg",
+    "to": "public/partner-yanbot-wechat.jpg"
+  }
+]
