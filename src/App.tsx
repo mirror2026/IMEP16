@@ -1,7 +1,7 @@
 import { motion, useAnimationControls, useMotionValue, useTransform, type PanInfo } from 'framer-motion'
 import { toPng, toSvg } from 'html-to-image'
 import { useEffect, useMemo, useRef, useState, type RefObject } from 'react'
-import JointProduction from './components/JointProduction'
+import DeveloperIpCard from './components/DeveloperIpCard'
 import PosterErrorToast from './components/PosterErrorToast'
 import PosterModal from './components/PosterModal'
 import ResultPage from './components/ResultPage'
@@ -251,7 +251,7 @@ function App() {
     <main className="relative mx-auto min-h-screen w-full max-w-md overflow-x-hidden bg-[url('/background.png')] bg-cover bg-center px-4 py-6 text-slate-100">
       <div className="relative z-10">
       {stage === 'testing' && current && (
-        <section className="flex flex-col gap-4 pb-6">
+        <section className="flex min-h-[calc(100vh-6rem)] flex-col gap-4 pb-0">
           <div className="rounded-2xl border border-white/30 bg-white/10 p-4 shadow-xl backdrop-blur-xl">
             <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
               <div className="flex items-center gap-2">
@@ -276,7 +276,7 @@ function App() {
               />
             </div>
           </div>
-          <div className="flex items-start justify-center pt-10">
+          <div className="flex flex-1 flex-col items-center justify-start pt-10">
             <SwipeCard
               key={current.id}
               question={current}
@@ -288,7 +288,7 @@ function App() {
               onAnswer={recordAnswer}
             />
           </div>
-          <JointProduction />
+          <DeveloperIpCard />
         </section>
       )}
 

@@ -7,7 +7,7 @@ export default function JointProduction() {
     >
       <p className="mb-1.5 text-xs font-bold text-amber-200">联合出品</p>
       <div className="space-y-2">
-        <div className="grid grid-cols-[1fr_120px] items-center gap-2 rounded-lg border border-white/15 bg-white/10 p-2">
+        <div className="grid grid-cols-[1fr_120px] items-center gap-2 rounded-lg border border-white/10 bg-black/25 p-2">
           <div>
             <a
               href="https://wings-ai.net"
@@ -33,7 +33,7 @@ export default function JointProduction() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-[1fr_120px] items-center gap-2 rounded-lg border border-white/15 bg-white/10 p-2">
+        <div className="grid grid-cols-[1fr_120px] items-center gap-2 rounded-lg border border-white/10 bg-black/25 p-2">
           <div>
             <a
               href="https://h5.yanbot.tech"

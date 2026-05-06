@@ -42,13 +42,19 @@ export default function ResultPage({ resultCode, axes }: ResultPageProps) {
   return (
     <div className="mx-auto min-h-screen w-full max-w-md px-3 py-4 text-slate-100">
       <p className="mb-3 text-center text-xs tracking-[0.22em] text-white/90">IMNB 大学生物种图鉴</p>
-      <div className="space-y-4 rounded-3xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-xl">
+
+      <div className="space-y-4 rounded-3xl border border-white/20 bg-white/10 p-4 pb-8 shadow-2xl backdrop-blur-md">
         <PersonaHeader resultCode={resultCode} resultImage={resultImage} />
         <GeneBars axes={axes} />
         <HeartfeltNote note={result.heartfeltNote} />
         <JointProduction />
-        <UltimateEggPromo />
       </div>
+
+      <div className="mt-8 mb-4 text-center text-sm font-medium tracking-widest text-white/60">
+        👇 测完性格，来点硬核的～
+      </div>
+
+      <UltimateEggPromo />
     </div>
   )
 }
@@ -108,14 +114,14 @@ function PersonaHeader({
         {infoCards.map((card) => (
           <div
             key={card.label}
-            className="flex h-28 flex-col rounded-xl bg-[#2B303A] p-3"
+            className="flex h-28 flex-col rounded-xl border border-white/5 bg-black/25 p-3 backdrop-blur-md"
           >
             <p className="mb-1 text-xs text-slate-300">
               {card.icon} {card.label}
             </p>
             <p className="line-clamp-1 text-sm font-semibold text-amber-200">{card.value}</p>
             {'detail' in card && card.detail && (
-              <p className="mt-1 line-clamp-2 flex-1 text-[11px] leading-relaxed text-slate-300">
+              <p className="mt-1 line-clamp-2 flex-1 text-[11px] leading-relaxed text-white">
                 {card.detail}
               </p>
             )}
@@ -167,7 +173,7 @@ function GeneBars({ axes }: { axes: AxisDatum[] }) {
           const dominantStyle = { width: `${dominantScore}%` }
 
           return (
-            <div key={axis.id} className="rounded-xl border border-white/15 bg-white/10 p-3">
+            <div key={axis.id} className="rounded-xl border border-white/5 bg-black/25 p-3">
             <div className="mb-1.5 flex items-center justify-between text-xs">
               <span className="text-slate-300">{axis.label}</span>
               <span className="font-semibold text-amber-300">
@@ -217,7 +223,7 @@ function HeartfeltNote({ note }: { note: string }) {
 }
 
 const EGG_HIGHLIGHTS = [
-  { headline: '精准分差带', sub: '冲刺 / 稳妥 / 保底 匹配' },
+  { headline: '精准分差带', sub: '冲刺 / 稳妥 / 保底' },
   { headline: '大数据依据', sub: '最新报录比与调剂线' },
   { headline: '置信度检验', sub: '规避信息差与跨考天坑' },
   { headline: 'AI 深度研判', sub: '专属备考路线规划' },
@@ -230,11 +236,15 @@ function UltimateEggPromo() {
 
   return (
     <section
-      className="mt-12 rounded-3xl border border-gray-100 bg-white p-5 shadow-xl"
+      className="mx-auto w-[92%] rounded-3xl border border-white/60 bg-white/90 p-4 shadow-[0_8px_30px_rgba(0,0,0,0.15)] backdrop-blur-xl"
       aria-labelledby="egg-promo-title"
     >
-      <div className="mb-4 inline-flex items-center rounded bg-blue-600 px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
-        ● YANBOT SELECTION MASTER
+      <div className="mb-4 inline-flex items-center rounded bg-blue-600 px-2.5 py-1.5 text-[11px] font-semibold text-white">
+        <span
+          className="mr-2 inline-block h-2 w-2 shrink-0 rounded-full bg-white animate-pulse"
+          aria-hidden
+        />
+        给考研党的彩蛋
       </div>
       <h2
         id="egg-promo-title"
@@ -244,13 +254,13 @@ function UltimateEggPromo() {
         <span> | 你最适合考哪所学校？</span>
       </h2>
       <p className="mt-2 text-xs leading-relaxed text-slate-600">
-        AI择校大师为你进行多维度的上岸策略推演：
+        「研Bot」AI择校大师为你进行多维度的上岸策略推演：
       </p>
-      <ul className="mt-4 grid grid-cols-2 gap-2.5">
+      <ul className="mt-4 grid grid-cols-2 gap-3">
         {EGG_HIGHLIGHTS.map((item) => (
           <li
             key={item.headline}
-            className="rounded-lg border border-gray-100 bg-[#F8FAFC] px-3 py-2.5"
+            className="rounded-lg border border-white/50 bg-white/60 px-2.5 py-2"
           >
             <p className="text-sm font-semibold leading-tight text-slate-800">{item.headline}</p>
             <p className="mt-1 text-xs leading-snug text-slate-500">{item.sub}</p>
@@ -260,7 +270,7 @@ function UltimateEggPromo() {
       <button
         type="button"
         onClick={goYanbot}
-        className="mt-5 w-full rounded-2xl bg-blue-600 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-700"
+        className="mt-5 w-full rounded-2xl bg-blue-600 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-colors hover:bg-blue-700"
       >
         点击生成专属择校报告
       </button>
