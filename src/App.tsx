@@ -251,8 +251,8 @@ function App() {
     <main className="relative mx-auto min-h-screen w-full max-w-md overflow-x-hidden bg-[url('/background.png')] bg-cover bg-center px-4 py-6 text-slate-100">
       <div className="relative z-10">
       {stage === 'testing' && current && (
-        <section className="flex min-h-[calc(100vh-6rem)] flex-col gap-4 pb-0">
-          <div className="rounded-2xl border border-white/30 bg-white/10 p-4 shadow-xl backdrop-blur-xl">
+        <section className="flex h-[calc(100svh-3rem)] max-h-[calc(100dvh-3rem)] flex-col gap-2 overflow-hidden pb-0">
+          <div className="shrink-0 rounded-2xl border border-white/30 bg-white/10 p-3 shadow-xl backdrop-blur-xl">
             <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
               <div className="flex items-center gap-2">
                 <button
@@ -276,7 +276,7 @@ function App() {
               />
             </div>
           </div>
-          <div className="flex flex-1 flex-col items-center justify-start pt-10">
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center py-1">
             <SwipeCard
               key={current.id}
               question={current}
@@ -454,7 +454,7 @@ function SwipeCard({
       dragElastic={0.15}
       style={{ x, rotate }}
       onDragEnd={handleDragEnd}
-      className="relative h-[430px] w-full max-w-[360px] rounded-3xl border border-white/30 bg-white/10 p-5 shadow-2xl backdrop-blur-xl"
+      className="relative h-[430px] max-h-[calc(100svh-17rem)] min-h-[260px] w-full max-w-[360px] rounded-3xl border border-white/30 bg-white/10 p-5 shadow-2xl backdrop-blur-xl"
     >
       <div className="absolute -top-14 left-1/2 flex h-36 w-36 -translate-x-1/2 items-center justify-center overflow-hidden rounded-full border border-white/40 bg-white/15 p-2 shadow-xl backdrop-blur-xl">
         <img

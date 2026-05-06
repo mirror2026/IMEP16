@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "zip": "npm run build && rm -f imnb-test-h5-production-v1.0.zip && cd dist && zip -r ../imnb-test-h5-production-v1.0.zip . -x '*.DS_Store' -x '**/.DS_Store' && cd .. && zip imnb-test-h5-production-v1.0.zip 部署说明.txt"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

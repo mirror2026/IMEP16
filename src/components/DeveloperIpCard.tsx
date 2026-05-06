@@ -1,9 +1,9 @@
 /** 答题页底部「个人 IP 开发者名片」（结果页仍使用 JointProduction） */
 export default function DeveloperIpCard() {
   return (
-    <div className="z-10 mx-auto mt-auto mb-6 flex w-full max-w-[360px] flex-col">
-      <div className="mb-2 ml-2 mt-5 text-[11px] tracking-widest text-white/70">✦ 创作者介绍</div>
-      <div className="flex w-full items-center gap-3 rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
+    <div className="z-10 mx-auto mb-2 flex w-full max-w-[360px] shrink-0 flex-col">
+      <div className="mb-1 ml-2 mt-0 text-[11px] tracking-widest text-white/70">✦ 创作者介绍</div>
+      <div className="flex w-full items-center gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-md">
         <img
           src="/奇迹飞鸟头像.png"
           alt="奇迹飞鸟"

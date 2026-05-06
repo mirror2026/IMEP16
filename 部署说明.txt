@@ -1,0 +1,1 @@
+服务器部署提示：纯静态 H5 项目，可直接将压缩包内容上传至 Nginx 或 CDN 根目录。如果访问 404，请在 Nginx 配置中加上 try_files $uri $uri/ /index.html;

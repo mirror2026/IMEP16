@@ -254,7 +254,7 @@ function UltimateEggPromo() {
         <span> | 你最适合考哪所学校？</span>
       </h2>
       <p className="mt-2 text-xs leading-relaxed text-slate-600">
-        「研Bot」AI择校大师为你进行多维度的上岸策略推演：
+        「研Bot」AI择校大师为你提供多维度上岸策略推演：
       </p>
       <ul className="mt-4 grid grid-cols-2 gap-3">
         {EGG_HIGHLIGHTS.map((item) => (
