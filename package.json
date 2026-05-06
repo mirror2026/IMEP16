@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "zip": "npm run build && rm -f imnb-test-h5-production-v1.0.zip && cd dist && zip -r ../imnb-test-h5-production-v1.0.zip . -x '*.DS_Store' -x '**/.DS_Store' && cd .. && zip imnb-test-h5-production-v1.0.zip 部署说明.txt"
+    "preview": "npm run build && wrangler dev",
+    "zip": "npm run build && rm -f imnb-test-h5-production-v1.0.zip && cd dist && zip -r ../imnb-test-h5-production-v1.0.zip . -x '*.DS_Store' -x '**/.DS_Store' && cd .. && zip imnb-test-h5-production-v1.0.zip 部署说明.txt",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
@@ -18,6 +19,7 @@
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.36.0",
     "@eslint/js": "^9.39.4",
     "@tailwindcss/vite": "^4.2.4",
     "@types/node": "^24.12.2",
@@ -31,6 +33,7 @@
     "tailwindcss": "^4.2.4",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.9"
+    "vite": "^8.0.9",
+    "wrangler": "^4.88.0"
   }
 }
