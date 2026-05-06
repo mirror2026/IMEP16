@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { resultMap } from '../data/results'
+import JointProduction from './JointProduction'
 
 type AxisDatum = {
   id: string
@@ -10,8 +11,6 @@ type AxisDatum = {
   rightScore: number
   winner: 'left' | 'right'
 }
-
-type DeepReportState = 'form' | 'loading' | 'success'
 
 type ResultPageProps = {
   resultCode: string
@@ -38,22 +37,8 @@ const resultImageMap: Record<string, string> = {
 }
 
 export default function ResultPage({ resultCode, axes }: ResultPageProps) {
-  const [deepReportState, setDeepReportState] = useState<DeepReportState>('form')
-  const [form, setForm] = useState({
-    undergraduateSchool: '',
-    targetMajor: '',
-    stage: '',
-  })
   const result = resultMap[resultCode] ?? resultMap.TSLO
   const resultImage = resultImageMap[resultCode] ? encodeURI(resultImageMap[resultCode]) : ''
-
-  const submitDeepReport = (event: React.FormEvent) => {
-    event.preventDefault()
-    setDeepReportState('loading')
-    window.setTimeout(() => {
-      setDeepReportState('success')
-    }, 2000)
-  }
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-md px-3 py-4 text-slate-100">
@@ -62,13 +47,8 @@ export default function ResultPage({ resultCode, axes }: ResultPageProps) {
         <PersonaHeader resultCode={resultCode} resultImage={resultImage} />
         <GeneBars axes={axes} />
         <HeartfeltNote note={result.heartfeltNote} />
-        <MarketingBanner />
-        <DeepReportSection
-          form={form}
-          deepReportState={deepReportState}
-          onSubmit={submitDeepReport}
-          onChange={setForm}
-        />
+        <JointProduction />
+        <UltimateEggPromo />
       </div>
     </div>
   )
@@ -237,126 +217,85 @@ function HeartfeltNote({ note }: { note: string }) {
   )
 }
 
-function MarketingBanner() {
+const EGG_HIGHLIGHTS = [
+  {
+    icon: '🎯',
+    headline: '精准梯队定位',
+    sub: '「冲/稳/保」三档建议',
+  },
+  {
+    icon: '📊',
+    headline: '硬核数据底座',
+    sub: '基于往年真实报录比',
+  },
+  {
+    icon: '⚠️',
+    headline: '核心风险预警',
+    sub: '精准定位背景短板',
+  },
+  {
+    icon: '🗺️',
+    headline: '通关行动指南',
+    sub: '定制备考路线图',
+  },
+] as const
+
+function UltimateEggPromo() {
+  const goYanbot = () => {
+    window.location.href = 'https://h5.yanbot.tech/imnb'
+  }
+
   return (
-    <section className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
-      <h2 className="mb-3 text-base font-bold text-amber-200">联合出品</h2>
-      <div className="space-y-3">
-        <div className="rounded-xl border border-white/15 bg-white/10 p-3">
-          <a
-            href="https://wings-ai.net"
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-semibold text-amber-300 underline underline-offset-2"
-          >
-            奇迹自习室（wings-ai.net）
-          </a>
-          <p className="mt-1 text-xs text-slate-300">
-            辅助记忆考研知识点，可视化管理你的自习进度
-          </p>
-          <div className="mt-2 flex items-center gap-3">
-            <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-white/20 bg-black/25 text-[11px] text-slate-200">
-              二维码
-            </div>
-            <div>
-              <p className="text-xs text-slate-300">扫码关注公众号</p>
-              <p className="mt-0.5 text-sm font-semibold text-white">奇迹飞鸟</p>
-            </div>
-          </div>
-        </div>
-        <div className="rounded-xl border border-white/15 bg-white/10 p-3">
-          <a
-            href="https://h5.yanbot.tech"
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-semibold text-amber-300 underline underline-offset-2"
-          >
-            研Bot（h5.yanbot.tech）
-          </a>
-          <p className="mt-1 text-xs text-slate-300">全网最硬核的考研院校大数据平台</p>
-          <div className="mt-2 flex items-center gap-3">
-            <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-white/20 bg-black/25 text-[11px] text-slate-200">
-              二维码
-            </div>
-            <div>
-              <p className="text-xs text-slate-300">扫码关注公众号</p>
-              <p className="mt-0.5 text-sm font-semibold text-white">研Bot</p>
-            </div>
-          </div>
-        </div>
+    <section
+      className="rounded-2xl border border-amber-500/30 bg-slate-900/80 p-4 shadow-[0_0_15px_rgba(245,158,11,0.1)] backdrop-blur-md"
+      aria-labelledby="egg-promo-title"
+    >
+      <div className="mb-3 inline-flex items-center rounded-full bg-amber-400 px-2.5 py-1 text-[10px] font-bold tracking-wide text-slate-900">
+        🎁 考研党福利
       </div>
-    </section>
-  )
-}
-
-function DeepReportSection({
-  form,
-  deepReportState,
-  onSubmit,
-  onChange,
-}: {
-  form: { undergraduateSchool: string; targetMajor: string; stage: string }
-  deepReportState: DeepReportState
-  onSubmit: (event: React.FormEvent) => void
-  onChange: (value: { undergraduateSchool: string; targetMajor: string; stage: string }) => void
-}) {
-  return (
-    <section className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
-      {deepReportState === 'form' && (
-        <>
-          <h2 className="mb-3 text-base font-bold text-amber-200">
-            获取专属考研建议
-          </h2>
-          <form className="space-y-2.5" onSubmit={onSubmit}>
-            <input
-              value={form.undergraduateSchool}
-              onChange={(event) =>
-                onChange({ ...form, undergraduateSchool: event.target.value })
-              }
-              placeholder="本科院校"
-              className="w-full rounded-xl border border-slate-500/40 bg-slate-700/60 px-3 py-2.5 text-sm placeholder:text-slate-300"
-            />
-            <input
-              value={form.targetMajor}
-              onChange={(event) => onChange({ ...form, targetMajor: event.target.value })}
-              placeholder="目标专业代码/名称"
-              className="w-full rounded-xl border border-slate-500/40 bg-slate-700/60 px-3 py-2.5 text-sm placeholder:text-slate-300"
-            />
-            <input
-              value={form.stage}
-              onChange={(event) => onChange({ ...form, stage: event.target.value })}
-              placeholder="目前复习阶段"
-              className="w-full rounded-xl border border-slate-500/40 bg-slate-700/60 px-3 py-2.5 text-sm placeholder:text-slate-300"
-            />
-            <button
-              type="submit"
-              className="mt-1 w-full rounded-xl bg-amber-500 py-2.5 text-sm font-bold text-slate-900 shadow-[0_8px_24px_rgba(245,158,11,0.35)]"
-            >
-              一键生成评估结果（免费）
-            </button>
-          </form>
-        </>
-      )}
-
-      {deepReportState === 'loading' && (
-        <div className="flex min-h-[190px] flex-col items-center justify-center gap-3">
-          <div className="h-9 w-9 animate-spin rounded-full border-2 border-amber-300/30 border-t-amber-500" />
-          <p className="text-sm font-semibold text-amber-200">研Bot 大数据检索中...</p>
-        </div>
-      )}
-
-      {deepReportState === 'success' && (
-        <div className="space-y-2 rounded-xl border border-amber-400/30 bg-amber-500/10 p-3">
-          <h3 className="text-sm font-bold text-amber-200">AI 报考评估报告</h3>
-          <p className="text-sm text-slate-100">💡 推荐冲刺院校：电子科技大学 (985)</p>
-          <p className="text-sm text-slate-100">📊 往年复试线：345分 / 录取均分: 362分</p>
-          <p className="text-sm text-slate-100">📈 最新报录比：1 : 12 (竞争极度激烈)</p>
-          <p className="text-sm leading-relaxed text-slate-200">
-            ⚠️ 研Bot 诊断：你的 TSLO 卷王基因非常契合该专业的理论深度，但建议重点提升专业课二的
-            实战项目经验，难度评级：⭐⭐⭐⭐
-          </p>
-        </div>
-      )}
+      <h2
+        id="egg-promo-title"
+        className="text-base font-semibold leading-snug tracking-tight sm:text-lg"
+      >
+        <span className="text-amber-400">限时免费</span>
+        <span className="text-white"> | 你最适合考哪所学校？</span>
+      </h2>
+      <p className="mt-2 text-xs leading-relaxed text-slate-400">
+        AI择校大师为你进行多维度的上岸策略推演：
+      </p>
+      <ul className="mt-3 grid grid-cols-2 gap-2">
+        {EGG_HIGHLIGHTS.map((item) => (
+          <li
+            key={item.headline}
+            className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-2"
+          >
+            <div className="flex items-start gap-1.5">
+              <span className="shrink-0 text-base leading-none" aria-hidden>
+                {item.icon}
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[13px] font-bold leading-tight text-amber-100">{item.headline}</p>
+                <p className="mt-1 text-[10px] leading-snug text-slate-400">{item.sub}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <motion.button
+        type="button"
+        onClick={goYanbot}
+        className="mt-4 w-full rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 bg-[length:200%_100%] py-4 text-base font-black text-slate-900 shadow-[0_0_28px_rgba(245,158,11,0.5),0_10px_28px_rgba(245,158,11,0.3)] transition-shadow hover:shadow-[0_0_36px_rgba(245,158,11,0.6)]"
+        animate={{
+          boxShadow: [
+            '0 0 20px rgba(245,158,11,0.35), 0 8px 24px rgba(245,158,11,0.2)',
+            '0 0 36px rgba(245,158,11,0.55), 0 10px 28px rgba(245,158,11,0.35)',
+            '0 0 20px rgba(245,158,11,0.35), 0 8px 24px rgba(245,158,11,0.2)',
+          ],
+        }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        🚀 点击生成专属择校报告
+      </motion.button>
     </section>
   )
 }
