@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { resultMap } from '../data/results'
 import JointProduction from './JointProduction'
 
@@ -218,26 +217,10 @@ function HeartfeltNote({ note }: { note: string }) {
 }
 
 const EGG_HIGHLIGHTS = [
-  {
-    icon: '🎯',
-    headline: '精准梯队定位',
-    sub: '「冲/稳/保」三档建议',
-  },
-  {
-    icon: '📊',
-    headline: '硬核数据底座',
-    sub: '基于往年真实报录比',
-  },
-  {
-    icon: '⚠️',
-    headline: '核心风险预警',
-    sub: '精准定位背景短板',
-  },
-  {
-    icon: '🗺️',
-    headline: '通关行动指南',
-    sub: '定制备考路线图',
-  },
+  { headline: '精准分差带', sub: '冲刺 / 稳妥 / 保底 匹配' },
+  { headline: '大数据依据', sub: '最新报录比与调剂线' },
+  { headline: '置信度检验', sub: '规避信息差与跨考天坑' },
+  { headline: 'AI 深度研判', sub: '专属备考路线规划' },
 ] as const
 
 function UltimateEggPromo() {
@@ -247,55 +230,40 @@ function UltimateEggPromo() {
 
   return (
     <section
-      className="rounded-2xl border border-amber-500/30 bg-slate-900/80 p-4 shadow-[0_0_15px_rgba(245,158,11,0.1)] backdrop-blur-md"
+      className="mt-12 rounded-3xl border border-gray-100 bg-white p-5 shadow-xl"
       aria-labelledby="egg-promo-title"
     >
-      <div className="mb-3 inline-flex items-center rounded-full bg-amber-400 px-2.5 py-1 text-[10px] font-bold tracking-wide text-slate-900">
-        🎁 考研党福利
+      <div className="mb-4 inline-flex items-center rounded bg-blue-600 px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+        ● YANBOT SELECTION MASTER
       </div>
       <h2
         id="egg-promo-title"
-        className="text-base font-semibold leading-snug tracking-tight sm:text-lg"
+        className="text-base font-semibold leading-snug tracking-tight text-slate-900 sm:text-lg"
       >
-        <span className="text-amber-400">限时免费</span>
-        <span className="text-white"> | 你最适合考哪所学校？</span>
+        <span className="text-blue-600">限时免费</span>
+        <span> | 你最适合考哪所学校？</span>
       </h2>
-      <p className="mt-2 text-xs leading-relaxed text-slate-400">
+      <p className="mt-2 text-xs leading-relaxed text-slate-600">
         AI择校大师为你进行多维度的上岸策略推演：
       </p>
-      <ul className="mt-3 grid grid-cols-2 gap-2">
+      <ul className="mt-4 grid grid-cols-2 gap-2.5">
         {EGG_HIGHLIGHTS.map((item) => (
           <li
             key={item.headline}
-            className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-2"
+            className="rounded-lg border border-gray-100 bg-[#F8FAFC] px-3 py-2.5"
           >
-            <div className="flex items-start gap-1.5">
-              <span className="shrink-0 text-base leading-none" aria-hidden>
-                {item.icon}
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-[13px] font-bold leading-tight text-amber-100">{item.headline}</p>
-                <p className="mt-1 text-[10px] leading-snug text-slate-400">{item.sub}</p>
-              </div>
-            </div>
+            <p className="text-sm font-semibold leading-tight text-slate-800">{item.headline}</p>
+            <p className="mt-1 text-xs leading-snug text-slate-500">{item.sub}</p>
           </li>
         ))}
       </ul>
-      <motion.button
+      <button
         type="button"
         onClick={goYanbot}
-        className="mt-4 w-full rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 bg-[length:200%_100%] py-4 text-base font-black text-slate-900 shadow-[0_0_28px_rgba(245,158,11,0.5),0_10px_28px_rgba(245,158,11,0.3)] transition-shadow hover:shadow-[0_0_36px_rgba(245,158,11,0.6)]"
-        animate={{
-          boxShadow: [
-            '0 0 20px rgba(245,158,11,0.35), 0 8px 24px rgba(245,158,11,0.2)',
-            '0 0 36px rgba(245,158,11,0.55), 0 10px 28px rgba(245,158,11,0.35)',
-            '0 0 20px rgba(245,158,11,0.35), 0 8px 24px rgba(245,158,11,0.2)',
-          ],
-        }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+        className="mt-5 w-full rounded-2xl bg-blue-600 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-700"
       >
-        🚀 点击生成专属择校报告
-      </motion.button>
+        点击生成专属择校报告
+      </button>
     </section>
   )
 }
